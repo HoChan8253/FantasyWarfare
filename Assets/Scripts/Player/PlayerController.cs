@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
 
     private Rigidbody2D _rigid;
-    private Vector2 _moveInput;
+    public Vector2 _moveInput;
     private Animator _anim;
     private SpriteRenderer _sprite;
 
