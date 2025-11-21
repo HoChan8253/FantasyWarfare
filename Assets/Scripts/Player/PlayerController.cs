@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Status")]
     [SerializeField] private float _moveSpeed = 5f;
 
     private Rigidbody2D _rigid;
@@ -21,8 +22,8 @@ public class PlayerController : MonoBehaviour
     {
         _moveInput = ctx.ReadValue<Vector2>();
 
-        bool isMoving = _moveInput.sqrMagnitude > 0.01f;
-        _anim.SetBool("IsMoving", isMoving);
+        bool _isMoving = _moveInput.sqrMagnitude > 0.01f;
+        _anim.SetBool("IsMoving", _isMoving);
 
         if(_moveInput.x < 0)
         {

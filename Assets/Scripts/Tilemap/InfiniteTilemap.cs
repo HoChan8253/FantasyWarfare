@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class InfiniteTilemap : MonoBehaviour
 {
-    [Header("플레이어")]
-    public Transform _player;
+    [Header("Player ref")]
+    [SerializeField] private Transform _player;
 
-    [Header("청크 설정")]
-    public float _chunkSize = 20f; // 청크 한 칸 크기
-    public int _chunksToMove = 3; // 한 번 이동할 칸 수
+    [Header("Chunk Settings")]
+    [SerializeField] private float _chunkSize = 20f; // 청크 한 칸 크기
+    [SerializeField] private int _chunksToMove = 3; // 한 번 이동할 칸 수
 
     private Vector2Int _index; // 이 청크의 현재 그리드 인덱스
 
