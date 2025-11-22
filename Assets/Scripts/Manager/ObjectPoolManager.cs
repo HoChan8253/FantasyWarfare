@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class ObjectPoolManager : MonoBehaviour
 {
@@ -18,26 +17,40 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    private GameObject Get(int index)
+    public GameObject GetPoolObj(int index)
     {
+        // 잘못된 index 체크
+        if(index < 0 || index >= _objPools.Length)
+        {
+            return null;
+        }
+
         GameObject select = null;
 
+        // 비활성 객체 찾기
         foreach (GameObject _obj in _objPools[index])
         {
             if(!_obj.activeSelf)
             {
                 select = _obj;
-                select.SetActive(true);
+                //select.SetActive(true);
                 break;
             }
         }
 
-        if(!select)
+        if(select == null)
         {
             select = Instantiate(_prefabs[index], transform);
             _objPools[index].Add(select);
         }
+        select.SetActive(true);
+
         return select;
+    }
+
+    public void ReturnObj(GameObject obj)
+    {
+        obj.SetActive(false);
     }
 
 }

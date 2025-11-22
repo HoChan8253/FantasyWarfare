@@ -78,4 +78,17 @@ public class EnemyController : MonoBehaviour
 
         MoveToTarget();
     }
+
+    private void LateUpdate()
+    {
+        //if(!_isAlive)
+        //{
+        //    return;
+        //}
+    }
+
+    private void OnEnable()
+    {
+        _target = GameManager._instance._player.GetComponent<Rigidbody2D>();
+    }
 }

@@ -11,11 +11,18 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private SpriteRenderer _sprite;
 
+    [SerializeField] private EnemySpawner _enemySpawner;
+
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
+
+        if(_enemySpawner == null)
+        {
+            _enemySpawner = GetComponentInChildren<EnemySpawner>();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -32,6 +39,25 @@ public class PlayerController : MonoBehaviour
         else if(_moveInput.x > 0)
         {
             _sprite.flipX = false;
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        if(!ctx.performed)
+        {
+            return;
+        }
+
+        Debug.Log("OnJump »£√‚µ ");
+
+        if(_enemySpawner != null)
+        {
+            _enemySpawner.SpawnOne();
+        }
+        else
+        {
+            Debug.Log("π∫∞° «“¥Á æ»µ ");
         }
     }
 
