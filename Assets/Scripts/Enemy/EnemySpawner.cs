@@ -5,18 +5,22 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private ObjectPoolManager _poolManager;
     [SerializeField] private Transform _player;
-    //[SerializeField] private Transform _spawnPoint;
-    [SerializeField] private float _spawnDelay = 2f;
+    [SerializeField] private float _spawnDelay = 1.5f;
 
     [Header("Player 스폰 반경")]
-    [SerializeField] private float _minRadius = 9f;
-    [SerializeField] private float _maxRadius = 11f;
+    [SerializeField] private float _minRadius = 6f;
+    [SerializeField] private float _maxRadius = 8f;
 
     private Coroutine _spawnRoutine;
 
-    private void OnEnable()
+    private void Start()
     {
         _spawnRoutine = StartCoroutine(SpawnLoop());
+    }
+
+    private void OnEnable()
+    {
+        //_spawnRoutine = StartCoroutine(SpawnLoop());
     }
 
     private void OnDisable()
@@ -32,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while(true)
         {
-            SpawnLoop();
+            SpawnOne();
             yield return new WaitForSeconds(_spawnDelay);
         }
     }
@@ -40,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnOne()
     {
         Vector2 spawnPos = RandomPosition();
-        GameObject enemy = _poolManager.GetPoolObj(0);
+        GameObject enemy = _poolManager.GetPoolObj(Random.Range(0,2));
         enemy.transform.position = spawnPos;
         Debug.Log("플레이어 주변 랜덤 소환");
     }

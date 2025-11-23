@@ -4846,7 +4846,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -35373,7 +35373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5443a8ae1a6966549a20d82de4711e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  _moveSpeed: 5
+  _moveSpeed: 3
   _moveInput: {x: 0, y: 0}
   _enemySpawner: {fileID: 0}
 --- !u!114 &1931270483
@@ -39799,7 +39799,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _poolManager: {fileID: 57129472}
-  _spawnPoint: {fileID: 906546494}
+  _player: {fileID: 1931270479}
+  _spawnDelay: 2
+  _minRadius: 6
+  _maxRadius: 8
 --- !u!1001 &6967791483965293793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39856,6 +39859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 6217609215985891917, guid: 7900005611bf17644b0f5d17d312faa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -39872,6 +39879,10 @@ PrefabInstance:
     - target: {fileID: 443750979709046963, guid: 275f2e497ceffce42bc1f312758bb450, type: 3}
       propertyPath: m_Name
       value: Enemy_Skel
+      objectReference: {fileID: 0}
+    - target: {fileID: 443750979709046963, guid: 275f2e497ceffce42bc1f312758bb450, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2571379590949409373, guid: 275f2e497ceffce42bc1f312758bb450, type: 3}
       propertyPath: _target

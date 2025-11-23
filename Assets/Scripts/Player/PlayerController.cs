@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Status")]
-    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _moveSpeed = 3f;
 
     private Rigidbody2D _rigid;
     public Vector2 _moveInput;
@@ -44,21 +44,21 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if(!ctx.performed)
-        {
-            return;
-        }
-
-        Debug.Log("OnJump »£√‚µ ");
-
-        if(_enemySpawner != null)
-        {
-            _enemySpawner.SpawnOne();
-        }
-        else
-        {
-            Debug.Log("π∫∞° «“¥Á æ»µ ");
-        }
+        //if(!ctx.performed)
+        //{
+        //    return;
+        //}
+        //
+        //Debug.Log("OnJump »£√‚µ ");
+        //
+        //if(_enemySpawner != null)
+        //{
+        //    _enemySpawner.SpawnOne();
+        //}
+        //else
+        //{
+        //    Debug.Log("π∫∞° «“¥Á æ»µ ");
+        //}
     }
 
     private void FixedUpdate()
