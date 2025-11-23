@@ -89,6 +89,12 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        if(GameManager._instance == null || GameManager._instance._player == null)
+        {
+            Debug.LogWarning("GameManager 또는 Player 가 아직 준비 안됬습니다.");
+            return;
+        }
+
         _target = GameManager._instance._player.GetComponent<Rigidbody2D>();
     }
 }

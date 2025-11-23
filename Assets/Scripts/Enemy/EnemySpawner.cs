@@ -1,19 +1,64 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private ObjectPoolManager _poolManager;
-    [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private Transform _player;
+    //[SerializeField] private Transform _spawnPoint;
+    [SerializeField] private float _spawnDelay = 2f;
 
-    private void Update()
+    [Header("Player 스폰 반경")]
+    [SerializeField] private float _minRadius = 9f;
+    [SerializeField] private float _maxRadius = 11f;
+
+    private Coroutine _spawnRoutine;
+
+    private void OnEnable()
     {
-        
+        _spawnRoutine = StartCoroutine(SpawnLoop());
+    }
+
+    private void OnDisable()
+    {
+        if(_spawnRoutine != null)
+        {
+            StopCoroutine(_spawnRoutine);
+            _spawnRoutine = null;
+        }
+    }
+
+    private IEnumerator SpawnLoop()
+    {
+        while(true)
+        {
+            SpawnLoop();
+            yield return new WaitForSeconds(_spawnDelay);
+        }
     }
 
     public void SpawnOne()
     {
+        Vector2 spawnPos = RandomPosition();
         GameObject enemy = _poolManager.GetPoolObj(0);
-        enemy.transform.position = _spawnPoint.position;
-        Debug.Log("소환되었음");
+        enemy.transform.position = spawnPos;
+        Debug.Log("플레이어 주변 랜덤 소환");
+    }
+
+    private Vector2 RandomPosition()
+    {
+        Vector2 center = _player.position;
+
+        // 최소 반경 ~ 최대 반경 사이 거리
+        float distance = Random.Range(_minRadius, _maxRadius);
+
+        // 0 ~ 360도 랜덤 방향
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+
+        // 방향 벡터 생성
+        Vector2 dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+        // 위치 = 플레이어 + ( 방향 * 벡터 )
+        return center + dir * distance;
     }
 }
