@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Replace Settings")]
     [Tooltip("이 거리보다 멀어지면 플레이어 근처로 재배치")]
-    [SerializeField][Range(10f, 25f)] private float _repoDistance = 11f;
+    [SerializeField][Range(10f, 25f)] private float _repoDistance = 10f;
     
     [Tooltip("플레이어 주변 재배치")]
     [SerializeField][Range(1f, 15f)] private float _respawnRadius = 8f;

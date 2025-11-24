@@ -194,5 +194,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _moveSpeed: 2.5
   _target: {fileID: 0}
-  _repoDistance: 11
+  _repoDistance: 10
   _respawnRadius: 8

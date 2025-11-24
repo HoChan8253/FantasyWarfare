@@ -39803,9 +39803,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _poolManager: {fileID: 57129472}
   _player: {fileID: 1931270479}
-  _spawnDelay: 2
   _minRadius: 6
   _maxRadius: 8
+  _phase1Delay: 2
+  _phase2Delay: 1
+  _phase3Delay: 0.5
+  _phase1EndTime: 30
+  _phase2EndTime: 60
 --- !u!1001 &6967791483965293793
 PrefabInstance:
   m_ObjectHideFlags: 0

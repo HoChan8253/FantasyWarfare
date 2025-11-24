@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5452441850244195891}
   - component: {fileID: 8531198861304727026}
   - component: {fileID: 1785719844805524840}
+  - component: {fileID: -316645142611693682}
   m_Layer: 0
   m_Name: Enemy_Slime
   m_TagString: Untagged
@@ -196,3 +197,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-316645142611693682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3960390520287041165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54017c542a13daa44938141ee5e963f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  _moveSpeed: 1.8
+  _target: {fileID: 0}
+  _repoDistance: 10
+  _respawnRadius: 8
