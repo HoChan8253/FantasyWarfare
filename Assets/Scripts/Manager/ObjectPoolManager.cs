@@ -3,17 +3,35 @@ using System.Collections.Generic;
 
 public class ObjectPoolManager : MonoBehaviour
 {
+    public static ObjectPoolManager Instance { get; private set; }
+
+    [SerializeField] private int _defaultCapacity = 20;
     [SerializeField] private GameObject[] _prefabs;
 
     List<GameObject>[] _objPools;
-
+    
     private void Awake()
     {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+
         _objPools = new List<GameObject>[_prefabs.Length];
 
-        for(int index = 0; index < _objPools.Length; index++)
+        for(int i = 0; i < _objPools.Length; i++)
         {
-            _objPools[index] = new List<GameObject>();
+            _objPools[i] = new List<GameObject>();
+
+            for(int j = 0; j < _defaultCapacity; j++)
+            {
+                GameObject obj = Instantiate(_prefabs[i], transform);
+                obj.SetActive(false);
+                _objPools[i].Add(obj);
+            }
         }
     }
 
@@ -46,6 +64,17 @@ public class ObjectPoolManager : MonoBehaviour
         select.SetActive(true);
 
         return select;
+    }
+
+    public T GetPoolObj<T>(int index) where T : Component
+    {
+        GameObject obj = GetPoolObj(index);
+        if(obj == null)
+        {
+            return null;
+        }
+
+        return obj.GetComponent<T>();
     }
 
     public void ReturnObj(GameObject obj)

@@ -192,7 +192,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54017c542a13daa44938141ee5e963f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  _moveSpeed: 2
+  _data: {fileID: 11400000, guid: 5a2ebbb31b4d4ac4aaecb41d19fa9f35, type: 2}
   _target: {fileID: 0}
-  _repoDistance: 10
-  _respawnRadius: 8

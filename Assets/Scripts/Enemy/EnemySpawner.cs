@@ -10,7 +10,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float _minRadius = 6f;
     [SerializeField] private float _maxRadius = 8f;
 
-    private int _level;
     private float _elapsedTime;
     private float _spawnTimer;
 
@@ -21,10 +20,19 @@ public class EnemySpawner : MonoBehaviour
         _elapsedTime = 0f;
         _spawnTimer = 0f;
         //_spawnRoutine = StartCoroutine(SpawnLoop());
+        if(_player == null && GameManager._instance != null && GameManager._instance._player != null)
+        {
+            _player = GameManager._instance._player.transform;
+        }
     }
 
     private void Update()
     {
+        if(_player == null)
+        {
+            return;
+        }
+
         _elapsedTime += Time.deltaTime;
         _spawnTimer += Time.deltaTime;
 
@@ -64,6 +72,12 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnOne()
     {
+        if(ObjectPoolManager.Instance == null)
+        {
+            Debug.LogWarning("ObjectPoolManager 인스턴스가 없습니다.");
+            return;
+        }
+
         Vector2 spawnPos = RandomPosition();
 
         int enemyIndex = GetEnemyIndex();

@@ -2,27 +2,85 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Enemy Status")]
-    [SerializeField] private float _moveSpeed = 3f;
+    [Header("Enemy Data")]
+    [SerializeField] private EnemyData _data;
 
-    [Tooltip("추적 대상")]
+    [Header("Target")]
+    [Tooltip("Chasing Target")]
     [SerializeField] private Rigidbody2D _target;
-
-    [Header("Replace Settings")]
-    [Tooltip("이 거리보다 멀어지면 플레이어 근처로 재배치")]
-    [SerializeField][Range(10f, 25f)] private float _repoDistance = 10f;
-    
-    [Tooltip("플레이어 주변 재배치")]
-    [SerializeField][Range(1f, 15f)] private float _respawnRadius = 8f;
-
-    private bool _isAlive;
 
     private Rigidbody2D _rigid;
     private Animator _anim;
     private SpriteRenderer _sprite;
 
+    private float _currentHP;
+    private bool _isAlive;
+
+    private void Awake()
+    {
+        _rigid = GetComponent<Rigidbody2D>();
+        _sprite = GetComponent<SpriteRenderer>();
+        _anim = GetComponent<Animator>();
+
+        if(_data == null)
+        {
+            return;
+        }
+
+        _currentHP = _data._maxHP;
+        _isAlive = true;
+
+        if(_data._sprite != null)
+        {
+            _sprite.sprite = _data._sprite;
+        }
+
+        if(_data._animatorController != null)
+        {
+            _anim.runtimeAnimatorController = _data._animatorController;
+        }
+    }
+
+    private void OnEnable()
+    {
+        _isAlive = true;
+
+        if(_data != null)
+        {
+            _currentHP = _data._maxHP;
+            _rigid.linearVelocity = Vector2.zero;
+        }
+
+        if (GameManager._instance == null || GameManager._instance._player == null)
+        {
+            Debug.LogWarning("GameManager 또는 Player 가 아직 준비 안됬습니다.");
+            return;
+        }
+
+        _target = GameManager._instance._player.GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(!_isAlive)
+        {
+            _rigid.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (_target == null || _data == null)
+        {
+            return;
+        }
+
+        RespawnEnemy();
+        MoveToTarget();
+    }
+
     private void MoveToTarget()
     {
+        float _moveSpeed = _data._moveSpeed;
+
         Vector2 _dir = _target.position - _rigid.position; // 이동할 방향
         Vector2 _moveDir = _dir.normalized;
         Vector2 _newVelocity = _moveDir * _moveSpeed;
@@ -43,6 +101,9 @@ public class EnemyController : MonoBehaviour
 
     private void RespawnEnemy()
     {
+        float _repoDistance = _data._repoDistance;
+        float _respawnRadius = _data._respawnRadius;
+
         float _dist = Vector2.Distance(_rigid.position, _target.position);
 
         if(_dist > _repoDistance)
@@ -54,47 +115,37 @@ public class EnemyController : MonoBehaviour
             _rigid.linearVelocity = Vector2.zero;
         }
     }
-
-    private void Awake()
+    
+    public void TakeDamage(int damage)
     {
-        _rigid = GetComponent<Rigidbody2D>();
-        _sprite = GetComponent<SpriteRenderer>();
-        _anim = GetComponent<Animator>();
-    }
-
-    private void FixedUpdate()
-    {
-        //if(!_isAlive)
-        //{
-        //    _rigid.linearVelocity = Vector2.zero;
-        //    return;
-        //}
-
-        if (_target == null)
+        if (!_isAlive || _data == null)
         {
             return;
         }
-        RespawnEnemy();
 
-        MoveToTarget();
-    }
+        _currentHP -= damage;
 
-    private void LateUpdate()
-    {
-        //if(!_isAlive)
-        //{
-        //    return;
-        //}
-    }
-
-    private void OnEnable()
-    {
-        if(GameManager._instance == null || GameManager._instance._player == null)
+        if(_currentHP <= 0)
         {
-            Debug.LogWarning("GameManager 또는 Player 가 아직 준비 안됬습니다.");
-            return;
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        _isAlive = false;
+        _rigid.linearVelocity = Vector2.zero;
+
+        if(_anim != null)
+        {
+            _anim.SetTrigger("Die");
         }
 
-        _target = GameManager._instance._player.GetComponent<Rigidbody2D>();
+        if(_data.deathSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(_data.deathSFX, transform.position);
+        }
+
+        ObjectPoolManager.Instance.ReturnObj(gameObject);
     }
 }
