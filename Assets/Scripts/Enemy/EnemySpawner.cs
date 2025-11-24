@@ -5,46 +5,75 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private ObjectPoolManager _poolManager;
     [SerializeField] private Transform _player;
+
+    [Header("Spawn 속도")]
     [SerializeField] private float _spawnDelay = 1.5f;
+    [SerializeField] private float _spawnFast = 0.2f;
 
     [Header("Player 스폰 반경")]
     [SerializeField] private float _minRadius = 6f;
     [SerializeField] private float _maxRadius = 8f;
 
-    private Coroutine _spawnRoutine;
+    [Header("난이도")]
+    [SerializeField] private float _phase1EndTime = 40f;
+    [SerializeField] private float _phase2EndTime = 80f;
+
+    private int _level;
+    private float _elapsedTime;
+    private float _spawnTimer;
+
+    //private Coroutine _spawnRoutine;
 
     private void Start()
     {
-        _spawnRoutine = StartCoroutine(SpawnLoop());
-    }
-
-    private void OnEnable()
-    {
+        _elapsedTime = 0f;
+        _spawnTimer = 0f;
         //_spawnRoutine = StartCoroutine(SpawnLoop());
     }
 
-    private void OnDisable()
+    private void Update()
     {
-        if(_spawnRoutine != null)
+        _elapsedTime += Time.deltaTime;
+        _spawnTimer += Time.deltaTime;
+
+        float currentSpawnDelay = GetCurrentSpawnDelay();
+
+        if(_spawnTimer >= currentSpawnDelay)
         {
-            StopCoroutine(_spawnRoutine);
-            _spawnRoutine = null;
+            _spawnTimer = 0f;
+            SpawnOne();
         }
+
+        //_level = Mathf.FloorToInt(GameManager._instance._gameTime / 10f);
     }
 
-    private IEnumerator SpawnLoop()
-    {
-        while(true)
-        {
-            SpawnOne();
-            yield return new WaitForSeconds(_spawnDelay);
-        }
-    }
+    //private void OnEnable()
+    //{
+    //    _spawnRoutine = StartCoroutine(SpawnLoop());
+    //}
+
+    //private void OnDisable()
+    //{
+    //    if(_spawnRoutine != null)
+    //    {
+    //        StopCoroutine(_spawnRoutine);
+    //        _spawnRoutine = null;
+    //    }
+    //}
+
+    //private IEnumerator SpawnLoop()
+    //{
+    //    while(true)
+    //    {
+    //        SpawnOne();
+    //        yield return new WaitForSeconds(_spawnDelay);
+    //    }
+    //}
 
     public void SpawnOne()
     {
         Vector2 spawnPos = RandomPosition();
-        GameObject enemy = _poolManager.GetPoolObj(Random.Range(0,2));
+        GameObject enemy = _poolManager.GetPoolObj(Random.Range(0,3));
         enemy.transform.position = spawnPos;
         Debug.Log("플레이어 주변 랜덤 소환");
     }
@@ -64,5 +93,26 @@ public class EnemySpawner : MonoBehaviour
 
         // 위치 = 플레이어 + ( 방향 * 벡터 )
         return center + dir * distance;
+    }
+
+    private float _phase1Delay = 2f;
+    private float _phase2Delay = 1f;
+    private float _phase3Delay = 0.5f;
+    
+
+    private float GetCurrentSpawnDelay()
+    {
+        if(_elapsedTime < _phase1EndTime)
+        {
+            return _phase1Delay;
+        }
+        else if(_elapsedTime < _phase2EndTime)
+        {
+            return _phase2Delay;
+        }
+        else
+        {
+            return _phase3Delay;
+        }
     }
 }
