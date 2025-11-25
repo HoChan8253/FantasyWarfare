@@ -8,8 +8,8 @@ public class PlayerExp : MonoBehaviour
 
     [Header("Experience")]
     [SerializeField] private int _currentExp = 0;
-    [SerializeField] private int _expToNextLevel = 10;
-    [SerializeField] private float _expGrowthRate = 1.3f; // 레벨업당 요구량 증가 배율
+    [SerializeField] private int _expToNextLevel = 5;
+    [SerializeField] private float _expGrowthRate = 1.5f; // 레벨업당 요구량 증가 배율
 
     public int Level => _level;
     public int CurrentExp => _currentExp;

@@ -26,6 +26,7 @@ public class PlayerHP : MonoBehaviour
         }
 
         OnHealthChanged?.Invoke(_currentHP, _maxHP);
+        Debug.Log($"플레이어 피격! 현재 HP : {_currentHP}");
 
         if(_currentHP == 0)
         {

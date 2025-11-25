@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -154,6 +155,8 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        GameManager._instance.AddKill();
+
         //if(_anim != null)
         //{
         //    _anim.SetTrigger("Die");
@@ -165,5 +168,14 @@ public class EnemyController : MonoBehaviour
         }
 
         ObjectPoolManager.Instance.ReturnObj(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerHP playerHP = collision.gameObject.GetComponent<PlayerHP>();
+        if(playerHP != null && _data != null)
+        {
+            playerHP.TakeDamage(_data._damage);
+        }
     }
 }
