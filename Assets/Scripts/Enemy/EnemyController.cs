@@ -147,26 +147,27 @@ public class EnemyController : MonoBehaviour
         _isAlive = false;
         _rigid.linearVelocity = Vector2.zero;
 
-        if(_data != null && GameManager._instance != null && GameManager._instance._player != null)
+        if(_data != null && GameManager._instance != null && GameManager._instance._playerExp != null)
         {
-            if(_data != null && GameManager._instance != null && GameManager._instance._playerExp != null)
-            {
                 GameManager._instance._playerExp.GainExp(_data._exp);
-            }
         }
 
         GameManager._instance.AddKill();
 
-        //if(_anim != null)
-        //{
-        //    _anim.SetTrigger("Die");
-        //}
+        if(_anim != null)
+        {
+            _anim.SetTrigger("Die");
+        }
 
         if(_data.deathSFX != null)
         {
             AudioSource.PlayClipAtPoint(_data.deathSFX, transform.position);
         }
+    }
 
+    public void OnDieAnimationEnd()
+    {
+        Debug.Log($"{name} OnDieAnimationEnd »£√‚");
         ObjectPoolManager.Instance.ReturnObj(gameObject);
     }
 
