@@ -18,7 +18,7 @@ MonoBehaviour:
   _maxHP: 15
   _moveSpeed: 2.6
   _damage: 1
-  _exp: 5
+  _exp: 3
   _sprite: {fileID: 4723107735738678597, guid: fc5fcf636ca7c014ca5b23fe455a3848, type: 3}
   _animatorController: {fileID: 9100000, guid: afddea29b5d527a4798bb054fcfc3d88, type: 2}
   deathSFX: {fileID: 0}

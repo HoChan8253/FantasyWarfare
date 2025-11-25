@@ -42,25 +42,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnJump(InputAction.CallbackContext ctx)
-    {
-        //if(!ctx.performed)
-        //{
-        //    return;
-        //}
-        //
-        //Debug.Log("OnJump »£√‚µ ");
-        //
-        //if(_enemySpawner != null)
-        //{
-        //    _enemySpawner.SpawnOne();
-        //}
-        //else
-        //{
-        //    Debug.Log("π∫∞° «“¥Á æ»µ ");
-        //}
-    }
-
     private void FixedUpdate()
     {
         _rigid.linearVelocity = _moveInput * _moveSpeed;

@@ -146,10 +146,19 @@ public class EnemyController : MonoBehaviour
         _isAlive = false;
         _rigid.linearVelocity = Vector2.zero;
 
-        if(_anim != null)
+        if(_data != null && GameManager._instance != null && GameManager._instance._player != null)
         {
-            _anim.SetTrigger("Die");
+            PlayerExp playerExp = GameManager._instance._player.GetComponent<PlayerExp>();
+            if(playerExp != null)
+            {
+                playerExp.GainExp(_data._exp);
+            }
         }
+
+        //if(_anim != null)
+        //{
+        //    _anim.SetTrigger("Die");
+        //}
 
         if(_data.deathSFX != null)
         {
