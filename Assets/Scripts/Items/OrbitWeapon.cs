@@ -9,7 +9,7 @@ public class OrbitWeapon : MonoBehaviour
     [SerializeField] private float _rotateSpeed = 150f;
 
     [Header("Current State")]
-    [SerializeField] private int _swordCount = 1; // 현재 검 개수
+    [SerializeField] private int _swordCount = 0; // 현재 검 개수
 
     private readonly List<Transform> _swords = new();
 
@@ -35,7 +35,7 @@ public class OrbitWeapon : MonoBehaviour
         }
         _swords.Clear();
 
-        if(_swords.Count <= 0)
+        if(_swordCount <= 0)
         {
             return;
         }

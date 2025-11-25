@@ -5814,55 +5814,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &634351000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 634351001}
-  - component: {fileID: 634351002}
-  m_Layer: 0
-  m_Name: OrbitWeaponRoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &634351001
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634351000}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1470509243}
-  m_Father: {fileID: 1931270479}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &634351002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634351000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58fa20ac8dbac2c46bf8a63d44e90724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OrbitWeapon
-  _swordPrefab: {fileID: 1470509241}
-  _radius: 1.2
-  _rotateSpeed: 150
-  _swordCount: 1
 --- !u!1 &748139654
 GameObject:
   m_ObjectHideFlags: 0
@@ -15436,6 +15387,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153977344}
   m_CullTransparentMesh: 1
+--- !u!1 &1161121231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161121232}
+  - component: {fileID: 1161121233}
+  m_Layer: 0
+  m_Name: Orbit_Sword_Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161121232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161121231}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1470509243}
+  m_Father: {fileID: 1931270479}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161121233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161121231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fa20ac8dbac2c46bf8a63d44e90724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitWeapon
+  _swordPrefab: {fileID: 1470509241}
+  _radius: 1.2
+  _rotateSpeed: 150
+  _swordCount: 1
 --- !u!1 &1172659599
 GameObject:
   m_ObjectHideFlags: 0
@@ -24736,7 +24736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1470509242
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24808,7 +24808,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 634351001}
+  m_Father: {fileID: 1161121232}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!1 &1495845316
 GameObject:
@@ -33561,14 +33561,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelUpUIManager
   _allItem:
-  - {fileID: 11400000, guid: fd40aa972935c284b812b4a9aed79c82, type: 2}
-  - {fileID: 11400000, guid: 2932da7cff42b7b42bf34b7948e3ff10, type: 2}
-  - {fileID: 11400000, guid: abc2b28d6383d6749ab938ded6a6081a, type: 2}
-  - {fileID: 11400000, guid: 5601af04a473dde488fefd63307b96aa, type: 2}
-  - {fileID: 11400000, guid: fd48aff066643994e900fdfd7f93da3d, type: 2}
-  - {fileID: 11400000, guid: 23a64ccca3348c242bb474d7f4ccdb07, type: 2}
-  - {fileID: 11400000, guid: ecfe3a1fb8808ea41b6024fd8fb5d476, type: 2}
   - {fileID: 11400000, guid: 823fbb052705a3945b583ccc71306c75, type: 2}
+  - {fileID: 11400000, guid: 23a64ccca3348c242bb474d7f4ccdb07, type: 2}
+  - {fileID: 11400000, guid: abc2b28d6383d6749ab938ded6a6081a, type: 2}
+  - {fileID: 11400000, guid: 2932da7cff42b7b42bf34b7948e3ff10, type: 2}
+  - {fileID: 11400000, guid: fd40aa972935c284b812b4a9aed79c82, type: 2}
+  - {fileID: 11400000, guid: 5601af04a473dde488fefd63307b96aa, type: 2}
+  - {fileID: 11400000, guid: 4ceb20c43e0c78945a453d4f4e74accd, type: 2}
+  - {fileID: 11400000, guid: 92795d566c266af47b9b457f43f3728c, type: 2}
   _panel: {fileID: 1857982122}
   _slots:
   - {fileID: 748139659}
@@ -38617,6 +38617,7 @@ MonoBehaviour:
   _projectileCount: 1
   _moveSpeedMultiplier: 1
   _maxHPBonus: 0
+  _orbitWeapon: {fileID: 1161121233}
 --- !u!1 &1945888850
 GameObject:
   m_ObjectHideFlags: 0
@@ -43644,7 +43645,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1025137308035856020, guid: 42851a5cf29301741851602772e914ae, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 634351001}
+      addedObject: {fileID: 1161121232}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4495570400620389124, guid: 42851a5cf29301741851602772e914ae, type: 3}
       insertIndex: -1

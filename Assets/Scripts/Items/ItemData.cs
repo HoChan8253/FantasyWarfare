@@ -5,14 +5,15 @@ public class ItemData : ScriptableObject
 {
     public enum ItemType
     {
-        Melee,
-        Range,
+        //Melee,
+        //Range,
         DamageUp,
         AttackSpeedUp,
         ProjectileCountUp,
         MoveSpeedUp,
         MaxHPUp,
-        Heal
+        Heal,
+        OrbitSword
     }
 
     [Header("Main Info")]

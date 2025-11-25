@@ -1,3 +1,4 @@
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class ItemManager : MonoBehaviour
 
     private PlayerHP _playerHP;
     private PlayerAttackController _attack;
+
+    [Header("Orbit Weapon")]
+    [SerializeField] private OrbitWeapon _orbitWeapon;
 
     private void Awake()
     {
@@ -44,6 +48,20 @@ public class ItemManager : MonoBehaviour
             case ItemData.ItemType.Heal:
                 _playerHP.Heal(item._baseCount);
                 break;
+
+            case ItemData.ItemType.OrbitSword:
+                ApplyOrbitSword(item);
+                break;
         }
+    }
+
+    private void ApplyOrbitSword(ItemData item)
+    {
+        if(!_orbitWeapon.gameObject.activeSelf)
+        {
+            _orbitWeapon.gameObject.SetActive(true);
+        }
+
+        _orbitWeapon.AddSword(item._baseCount);
     }
 }
