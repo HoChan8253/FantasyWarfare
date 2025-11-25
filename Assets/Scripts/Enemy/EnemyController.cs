@@ -1,6 +1,7 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class EnemyController : MonoBehaviour
     [Tooltip("Chasing Target")]
     [SerializeField] private Rigidbody2D _target;
 
+    private SpriteRenderer _spriteRenderer;
+    private Color _originalColor;
+    private float _hitFlashDuration = 0.1f;
+
+    private Coroutine _hitRoutine;
+
     private Rigidbody2D _rigid;
     private Animator _anim;
     private SpriteRenderer _sprite;
@@ -26,6 +33,8 @@ public class EnemyController : MonoBehaviour
         _rigid = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
+
+        _originalColor = _sprite.color;
 
         if(_data == null)
         {
@@ -136,6 +145,8 @@ public class EnemyController : MonoBehaviour
 
         _currentHP -= damage;
 
+        StartHitFlash(); // 피격시 연출
+
         if(_currentHP <= 0)
         {
             Die();
@@ -178,5 +189,24 @@ public class EnemyController : MonoBehaviour
         {
             playerHP.TakeDamage(_data._damage);
         }
+    }
+
+    private void StartHitFlash()
+    {
+        if(_hitRoutine != null)
+        {
+            StopCoroutine(_hitRoutine);
+        }
+        _hitRoutine = StartCoroutine(HitFlashRoutine());
+    }
+
+    private IEnumerator HitFlashRoutine()
+    {
+        _sprite.color = new Color(1f, 0.3f, 0.3f);
+
+        yield return new WaitForSeconds(_hitFlashDuration);
+
+        _sprite.color = _originalColor;
+        _hitRoutine = null;
     }
 }
