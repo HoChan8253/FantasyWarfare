@@ -20,5 +20,5 @@ MonoBehaviour:
   _damage: 1
   _exp: 5
   _sprite: {fileID: 5463189583543264802, guid: 077483217dde3b14e9c079fec3fac717, type: 3}
-  _animatroController: {fileID: 9100000, guid: 873d6686577367b43857e2776d83c1a2, type: 2}
+  _animatorController: {fileID: 9100000, guid: 873d6686577367b43857e2776d83c1a2, type: 2}
   deathSFX: {fileID: 0}

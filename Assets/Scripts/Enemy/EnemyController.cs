@@ -1,7 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
+    private static readonly List<EnemyController> _activeEnemies = new List<EnemyController>();
+    public static IReadOnlyList<EnemyController> _ActiveEnemise => _activeEnemies;
+
     [Header("Enemy Data")]
     [SerializeField] private EnemyData _data;
 
@@ -44,6 +48,7 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()
     {
         _isAlive = true;
+        _activeEnemies.Add(this);
 
         if(_data != null)
         {
@@ -58,6 +63,11 @@ public class EnemyController : MonoBehaviour
         }
 
         _target = GameManager._instance._player.GetComponent<Rigidbody2D>();
+    }
+
+    private void OnDisable()
+    {
+        _activeEnemies.Remove(this);
     }
 
     private void FixedUpdate()
