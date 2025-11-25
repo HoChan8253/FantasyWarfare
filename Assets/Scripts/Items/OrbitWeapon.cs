@@ -7,6 +7,7 @@ public class OrbitWeapon : MonoBehaviour
     [SerializeField] private GameObject _swordPrefab;
     [SerializeField] private float _radius = 1.2f;
     [SerializeField] private float _rotateSpeed = 150f;
+    [SerializeField] private float _spriteAngle = -45f;
 
     [Header("Current State")]
     [SerializeField] private int _swordCount = 0; // 현재 검 개수
@@ -40,12 +41,15 @@ public class OrbitWeapon : MonoBehaviour
             return;
         }
 
+        // 360도를 검 개수만큼 나눔
         float angleCalc = 360f / _swordCount;
 
+
+        // 각도에 맞춰 위치 / 회전 배치
         for(int i = 0; i < _swordCount; i++)
         {
             float angle = angleCalc * i;
-            float rad = angle * Mathf.Deg2Rad;
+            float rad = angle * Mathf.Deg2Rad; // degree(도) 를 radian(각도) 변환
 
             Vector3 localPos = new Vector3(
                 Mathf.Cos(rad) * _radius,
@@ -55,7 +59,11 @@ public class OrbitWeapon : MonoBehaviour
 
             GameObject swordObj = Instantiate(_swordPrefab, transform);
             swordObj.transform.localPosition = localPos;
-            swordObj.transform.localRotation = Quaternion.identity;
+
+            swordObj.transform.localRotation = Quaternion.Euler(
+                0f,
+                0f,
+                angle + _spriteAngle);
 
             _swords.Add(swordObj.transform);
         }
