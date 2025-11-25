@@ -1,16 +1,52 @@
+using System;
 using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private int _maxHP = 100;
+    private int _currentHP;
+
+    public int MaxHP => _maxHP;
+    public int CurrentHP => _currentHP;
+
+    public event Action OnDie;
+    public event Action<int, int> OnHealthChanged; // <currentHP , maxHP>
+
+    private void Awake()
     {
-        
+        _currentHP = _maxHP;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        _currentHP -= damage;
+        if(_currentHP < 0)
+        {
+            _currentHP = 0;
+        }
+
+        OnHealthChanged?.Invoke(_currentHP, _maxHP);
+
+        if(_currentHP == 0)
+        {
+            Die();
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        _currentHP += amount;
+        if(_currentHP > _maxHP)
+        {
+            _currentHP = _maxHP;
+        }
+
+        OnHealthChanged?.Invoke(_currentHP, _maxHP);
+    }
+
+    private void Die()
+    {
+        OnDie?.Invoke();
+        Debug.Log("Game Over");
     }
 }

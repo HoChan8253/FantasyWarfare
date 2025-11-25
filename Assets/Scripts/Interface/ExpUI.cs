@@ -26,6 +26,6 @@ public class ExpUI : MonoBehaviour
         _expSlider.maxValue = _playerExp.ExpToNextLevel;
         _expSlider.value = _playerExp.CurrentExp;
 
-        _levelText.text = $"Level : {_playerExp.Level}";
+        _levelText.text = $"Lvl : {_playerExp.Level}";
     }
 }

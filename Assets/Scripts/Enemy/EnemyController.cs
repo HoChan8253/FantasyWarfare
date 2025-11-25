@@ -148,10 +148,9 @@ public class EnemyController : MonoBehaviour
 
         if(_data != null && GameManager._instance != null && GameManager._instance._player != null)
         {
-            PlayerExp playerExp = GameManager._instance._player.GetComponent<PlayerExp>();
-            if(playerExp != null)
+            if(_data != null && GameManager._instance != null && GameManager._instance._playerExp != null)
             {
-                playerExp.GainExp(_data._exp);
+                GameManager._instance._playerExp.GainExp(_data._exp);
             }
         }
 
