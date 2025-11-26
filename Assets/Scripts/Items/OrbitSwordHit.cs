@@ -26,7 +26,7 @@ public class OrbitSwordHit : MonoBehaviour
         if(_itemManager != null)
         {
             _multi *= _itemManager._damageMultiplier;
-            _multi *= _itemManager._orbitDamageMultiplier;
+            //_multi *= _itemManager._orbitDamageMultiplier;
         }
 
         int finalDamage = Mathf.RoundToInt(_baseDamage * _multi);

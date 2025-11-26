@@ -15,6 +15,10 @@ public class EnemyController : MonoBehaviour
     [Tooltip("Chasing Target")]
     [SerializeField] private Rigidbody2D _target;
 
+    [Header("Contact Damage")]
+    [SerializeField] private float _contactDamageDelay = 0.7f; // x 초마다 한번씩 대미지 입힘
+    private float _laseContactDamageTime = -999f;
+
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
     private float _hitFlashDuration = 0.1f;
@@ -187,7 +191,17 @@ public class EnemyController : MonoBehaviour
         PlayerHP playerHP = collision.gameObject.GetComponent<PlayerHP>();
         if(playerHP != null && _data != null)
         {
-            playerHP.TakeDamage(_data._damage);
+            //playerHP.TakeDamage(_data._damage);
+            TryDealContactDamage(playerHP);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        PlayerHP playerHP = collision.gameObject.GetComponent<PlayerHP>();
+        if(playerHP != null && _data != null)
+        {
+            TryDealContactDamage(playerHP);
         }
     }
 
@@ -208,5 +222,21 @@ public class EnemyController : MonoBehaviour
 
         _sprite.color = _originalColor;
         _hitRoutine = null;
+    }
+
+    private void TryDealContactDamage(PlayerHP playerHP)
+    {
+        if(playerHP == null || _data == null || !_isAlive)
+        {
+            return;
+        }
+
+        if(Time.time - _laseContactDamageTime < _contactDamageDelay)
+        {
+            return;
+        }
+
+        _laseContactDamageTime = Time.time;
+        playerHP.TakeDamage(_data._damage);
     }
 }
