@@ -14,17 +14,39 @@ public class SoundManager : MonoBehaviour
     [Range(0f, 1f)] public float _bgmVolume = 0.2f;
     [Range(0f, 1f)] public float _sfxVolume = 0.2f;
 
+    // PalyerPrefs Key
+    private const string BGM_KEY = "BGM_VOLUME";
+    private const string SFX_KEY = "SFX_VOLUME";
+
     private void Awake()
     {
         if(_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+
+            LoadVolume();
         }
         else
         {
             Destroy(gameObject);
             return;
+        }
+    }
+
+    private void LoadVolume()
+    {
+        _bgmVolume = PlayerPrefs.GetFloat(BGM_KEY, _bgmVolume);
+        _sfxVolume = PlayerPrefs.GetFloat(SFX_KEY, _sfxVolume);
+
+        if (_bgmSource != null)
+        {
+            _bgmSource.volume = _bgmVolume;
+        }
+
+        if(_sfxSource != null)
+        {
+            _sfxSource.volume = _sfxVolume;
         }
     }
 
@@ -51,8 +73,33 @@ public class SoundManager : MonoBehaviour
 
     public void SetBGMVolume(float volume)
     {
-        _bgmVolume = volume;
-        _bgmSource.volume = _bgmVolume;
+        _bgmVolume = Mathf.Clamp01(volume);
+
+        if(_bgmSource != null)
+        {
+            _bgmSource.volume = _bgmVolume;
+        }
+
+        SaveVolume(); // 값 바뀔 때마다 저장
+    }
+    
+    public void SetSFXVolume(float volume)
+    {
+        _sfxVolume = Mathf.Clamp01(volume);
+
+        if(_sfxSource != null)
+        {
+            _sfxSource.volume = _sfxVolume;
+        }
+
+        SaveVolume(); // 값 바뀔 때마다 저장
+    }
+
+    private void SaveVolume()
+    {
+        PlayerPrefs.SetFloat(BGM_KEY, _bgmVolume);
+        PlayerPrefs.SetFloat(SFX_KEY, _sfxVolume);
+        PlayerPrefs.Save();
     }
 
     public void PlaySFX(AudioClip clip)
