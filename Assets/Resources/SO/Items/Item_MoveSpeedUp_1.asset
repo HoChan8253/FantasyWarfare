@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee90205e6dc6ab40820df9e051c006c, type: 3}
   m_Name: Item_MoveSpeedUp_1
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  _itemType: 5
+  _itemType: 3
   _itemId: 1006
   _itemName: Swift Boots
   _itemInfo: Speed Increase 10%

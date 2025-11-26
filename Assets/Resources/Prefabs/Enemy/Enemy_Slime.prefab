@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8531198861304727026}
   - component: {fileID: 1785719844805524840}
   - component: {fileID: -316645142611693682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}

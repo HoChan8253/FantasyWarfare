@@ -13,7 +13,9 @@ public class ItemData : ScriptableObject
         MoveSpeedUp,
         MaxHPUp,
         Heal,
-        OrbitSword
+        OrbitSword, // 회전검 개수 증가
+        OrbitSwordDamage, // 회전검 공격력 증가
+        HPRegen
     }
 
     [Header("Main Info")]

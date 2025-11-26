@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 384580752284663112}
   - component: {fileID: 79808992448039852}
   - component: {fileID: 2571379590949409373}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Skel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

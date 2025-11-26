@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private EnemySpawner _enemySpawner;
 
+    private ItemManager _itemManager;
+
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
@@ -22,6 +24,12 @@ public class PlayerController : MonoBehaviour
         if(_enemySpawner == null)
         {
             _enemySpawner = GetComponentInChildren<EnemySpawner>();
+        }
+
+        _itemManager = GetComponent<ItemManager>();
+        if(_itemManager == null)
+        {
+            return;
         }
     }
 
@@ -44,6 +52,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigid.linearVelocity = _moveInput * _moveSpeed;
+        float moveMulti = 1f;
+
+        if(_itemManager != null)
+        {
+            moveMulti = _itemManager._moveSpeedMultiplier;
+        }
+
+        float currentSpeed = _moveSpeed * moveMulti;
+
+        _rigid.linearVelocity = _moveInput * currentSpeed;
     }
 }

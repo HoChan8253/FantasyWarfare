@@ -12,7 +12,14 @@ public class OrbitWeapon : MonoBehaviour
     [Header("Current State")]
     [SerializeField] private int _swordCount = 0; // 현재 검 개수
 
-    private readonly List<Transform> _swords = new();
+    private ItemManager _itemManager;
+
+    private List<Transform> _swords = new();
+
+    private void Awake()
+    {
+        _itemManager = GetComponentInParent<ItemManager>();
+    }
 
     private void Start()
     {
@@ -64,6 +71,13 @@ public class OrbitWeapon : MonoBehaviour
                 0f,
                 0f,
                 angle + _spriteAngle);
+
+            OrbitSwordHit hit = swordObj.GetComponentInChildren<OrbitSwordHit>(); // 자식 객체 Collider 가 hit 일때 ItemManager 에 전달
+            if(hit != null)
+            {
+                Debug.Log("[OrbitWeapon] OrbitSwordHit Init 호출");
+                hit.Init(_itemManager);
+            }
 
             _swords.Add(swordObj.transform);
         }

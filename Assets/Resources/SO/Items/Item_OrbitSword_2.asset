@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee90205e6dc6ab40820df9e051c006c, type: 3}
   m_Name: Item_OrbitSword_2
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  _itemType: 6
+  _itemType: 7
   _itemId: 1010
-  _itemName: Orbit Swords
-  _itemInfo: Rotate sword +2
-  _itemIcon: {fileID: -6057427275313168550, guid: 538a0d217f2be8243ab222ea299e1fd4, type: 3}
-  _baseDamage: 0
-  _baseCount: 2
+  _itemName: Orbit Power
+  _itemInfo: Rotate sword 50%
+  _itemIcon: {fileID: 3475101186164888376, guid: 94004d2cdd2f1f040bfb0d4654188394, type: 3}
+  _baseDamage: 0.5
+  _baseCount: 0
   _projectile: {fileID: 0}
