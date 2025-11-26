@@ -5,6 +5,8 @@ public class ProjectileController : MonoBehaviour
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _lifeTime = 3f;
 
+    [SerializeField] private AudioClip _hitSFX;
+
     private int _damage;
     private Vector2 _direction;
     private float _elapsed;
@@ -38,6 +40,11 @@ public class ProjectileController : MonoBehaviour
         if (enemy != null)
         {
             enemy.TakeDamage(_damage);
+
+            if(SoundManager._instance != null && _hitSFX != null)
+            {
+                SoundManager._instance.PlaySFX(_hitSFX);
+            }
             gameObject.SetActive(false);
         }
     }

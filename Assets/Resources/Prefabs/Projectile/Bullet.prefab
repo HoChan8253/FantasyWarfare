@@ -165,3 +165,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileController
   _speed: 10
   _lifeTime: 3
+  _hitSFX: {fileID: 8300000, guid: 46b4e89312e6f01469efaba973c57d36, type: 3}
