@@ -59,6 +59,7 @@ public class SoundManager : MonoBehaviour
     {
         if(clip == null || _sfxSource == null)
         {
+            Debug.LogWarning("[SoundManager] PlaySFX ½ÇÆÐ");
             return;
         }
 

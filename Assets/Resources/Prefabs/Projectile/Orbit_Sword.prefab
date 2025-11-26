@@ -174,4 +174,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrbitSwordHit
   _baseDamage: 3
-  _hitSFX: {fileID: 8300000, guid: 5a3c97e22655842448df554206ed8b22, type: 3}
+  _hitSFX: {fileID: 8300000, guid: 46b4e89312e6f01469efaba973c57d36, type: 3}
