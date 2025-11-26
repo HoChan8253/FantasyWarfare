@@ -6,7 +6,6 @@ public class SoundManager : MonoBehaviour
 
     [Header("BGM")]
     [SerializeField] private AudioSource _bgmSource;
-    [SerializeField] private AudioClip _mainBGM;
 
     [Header("SFX")]
     [SerializeField] private AudioSource _sfxSource;
@@ -27,11 +26,6 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-    }
-
-    private void Start()
-    {
-        PlayBGM(_mainBGM);
     }
 
     public void PlayBGM(AudioClip clip)
