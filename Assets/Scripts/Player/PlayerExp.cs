@@ -39,7 +39,7 @@ public class PlayerExp : MonoBehaviour
 
         _expToNextLevel = Mathf.RoundToInt(_expToNextLevel * _expGrowthRate);
 
-        Debug.Log($"Level Up! Current Level : {_level}");
+        //Debug.Log($"Level Up! Current Level : {_level}");
 
         OnLevelUp?.Invoke(_level);
     }

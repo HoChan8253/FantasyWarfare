@@ -11,13 +11,30 @@ public class LevelUpUIManager : MonoBehaviour
     public ItemSlotUI[] _slots;
 
     private ItemManager _itemManager;
+    private PlayerExp _playerExp;
 
     private void Start()
     {
+        Init();
+
         _panel.SetActive(false);
         _itemManager = GameManager._instance._player.GetComponent<ItemManager>();
 
         GameManager._instance._playerExp.OnLevelUp += OnLevelUp;
+    }
+
+    private void Init()
+    {
+        if(GameManager._instance == null)
+        {
+            return;
+        }
+
+        if(GameManager._instance._playerExp == null)
+        {
+            return;
+        }
+        _playerExp = GameManager._instance._playerExp;
     }
 
     private void OnLevelUp(int level)

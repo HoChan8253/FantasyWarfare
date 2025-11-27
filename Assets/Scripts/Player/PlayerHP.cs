@@ -40,7 +40,7 @@ public class PlayerHP : MonoBehaviour
         }
 
         OnHealthChanged?.Invoke(_currentHP, _maxHP);
-        Debug.Log($"플레이어 피격! 현재 HP : {_currentHP}");
+        //Debug.Log($"플레이어 피격! 현재 HP : {_currentHP}");
 
         if(_currentHP == 0)
         {
@@ -91,6 +91,6 @@ public class PlayerHP : MonoBehaviour
         GameManager._instance.GameOver();
 
         OnDie?.Invoke();
-        Debug.Log("Game Over");
+        //Debug.Log("Game Over");
     }
 }

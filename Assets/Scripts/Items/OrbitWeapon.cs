@@ -75,7 +75,7 @@ public class OrbitWeapon : MonoBehaviour
             OrbitSwordHit hit = swordObj.GetComponentInChildren<OrbitSwordHit>(); // 자식 객체 Collider 가 hit 일때 ItemManager 에 전달
             if(hit != null)
             {
-                Debug.Log("[OrbitWeapon] OrbitSwordHit Init 호출");
+                //Debug.Log("[OrbitWeapon] OrbitSwordHit Init 호출");
                 hit.Init(_itemManager);
             }
 

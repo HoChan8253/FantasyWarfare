@@ -13,13 +13,11 @@ public class EnemySpawner : MonoBehaviour
     private float _elapsedTime;
     private float _spawnTimer;
 
-    //private Coroutine _spawnRoutine;
-
     private void Start()
     {
         _elapsedTime = 0f;
         _spawnTimer = 0f;
-        //_spawnRoutine = StartCoroutine(SpawnLoop());
+
         if(_player == null && GameManager._instance != null && GameManager._instance._player != null)
         {
             _player = GameManager._instance._player.transform;
@@ -43,38 +41,13 @@ public class EnemySpawner : MonoBehaviour
             _spawnTimer = 0f;
             SpawnOne();
         }
-
-        //_level = Mathf.FloorToInt(GameManager._instance._gameTime / 10f);
     }
-
-    //private void OnEnable()
-    //{
-    //    _spawnRoutine = StartCoroutine(SpawnLoop());
-    //}
-
-    //private void OnDisable()
-    //{
-    //    if(_spawnRoutine != null)
-    //    {
-    //        StopCoroutine(_spawnRoutine);
-    //        _spawnRoutine = null;
-    //    }
-    //}
-
-    //private IEnumerator SpawnLoop()
-    //{
-    //    while(true)
-    //    {
-    //        SpawnOne();
-    //        yield return new WaitForSeconds(_spawnDelay);
-    //    }
-    //}
 
     public void SpawnOne()
     {
         if(ObjectPoolManager.Instance == null)
         {
-            Debug.LogWarning("ObjectPoolManager 인스턴스가 없습니다.");
+            //Debug.LogWarning("ObjectPoolManager 인스턴스가 없습니다.");
             return;
         }
 
@@ -83,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
         int enemyIndex = GetEnemyIndex();
         GameObject enemy = _poolManager.GetPoolObj(enemyIndex);
         enemy.transform.position = spawnPos;
-        Debug.Log("플레이어 주변 랜덤 소환");
+        //Debug.Log("플레이어 주변 랜덤 소환");
     }
 
     private Vector2 RandomPosition()

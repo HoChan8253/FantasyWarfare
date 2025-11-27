@@ -106,7 +106,7 @@ public class SoundManager : MonoBehaviour
     {
         if(clip == null || _sfxSource == null)
         {
-            Debug.LogWarning("[SoundManager] PlaySFX 실패");
+            //Debug.LogWarning("[SoundManager] PlaySFX 실패");
             return;
         }
 

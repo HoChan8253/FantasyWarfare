@@ -18,7 +18,7 @@ public class VolumeUI : MonoBehaviour
 
         if(SoundManager._instance == null)
         {
-            Debug.LogWarning("[VolumeUI] SoundManager 인스턴스 없음");
+            //Debug.LogWarning("[VolumeUI] SoundManager 인스턴스 없음");
             return;
         }
 

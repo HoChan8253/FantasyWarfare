@@ -69,10 +69,23 @@ public class EnemyController : MonoBehaviour
             _currentHP = _data._maxHP;
             _rigid.linearVelocity = Vector2.zero;
         }
+        TrySetTarget();
+    }
 
-        if (GameManager._instance == null || GameManager._instance._player == null)
+    private void Start()
+    {
+        TrySetTarget();
+    }
+
+    private void TrySetTarget()
+    {
+        if (_target != null)
         {
-            Debug.LogWarning("GameManager 또는 Player 가 아직 준비 안됬습니다.");
+            return;
+        }
+
+        if(GameManager._instance == null || GameManager._instance._player == null)
+        {
             return;
         }
 
@@ -182,7 +195,7 @@ public class EnemyController : MonoBehaviour
 
     public void OnDieAnimationEnd()
     {
-        Debug.Log($"{name} OnDieAnimationEnd 호출");
+        //Debug.Log($"{name} OnDieAnimationEnd 호출");
         ObjectPoolManager.Instance.ReturnObj(gameObject);
     }
 

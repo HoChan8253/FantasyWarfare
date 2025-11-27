@@ -6607,8 +6607,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 522311885}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1653991018}
+        m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
         m_MethodName: OnClickGoTitle
         m_Mode: 1
         m_Arguments:
@@ -34079,6 +34079,7 @@ GameObject:
   - component: {fileID: 1653991015}
   - component: {fileID: 1653991017}
   - component: {fileID: 1653991016}
+  - component: {fileID: 1653991018}
   m_Layer: 5
   m_Name: GameOverPanel
   m_TagString: Untagged
@@ -34146,6 +34147,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653991014}
   m_CullTransparentMesh: 1
+--- !u!114 &1653991018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653991014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7440eb6a58ba65a419676dc3207b1af9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
 --- !u!1 &1672361150
 GameObject:
   m_ObjectHideFlags: 0

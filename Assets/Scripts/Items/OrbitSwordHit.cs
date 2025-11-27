@@ -15,7 +15,7 @@ public class OrbitSwordHit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"[OrbitSwordHit] 충돌 : {collision.name}");
+        //Debug.Log($"[OrbitSwordHit] 충돌 : {collision.name}");
 
         EnemyController enemy = collision.GetComponent<EnemyController>();
         if(enemy == null)

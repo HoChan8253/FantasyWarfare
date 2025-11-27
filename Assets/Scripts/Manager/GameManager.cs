@@ -17,22 +17,48 @@ public class GameManager : MonoBehaviour
     public ObjectPoolManager _objPool;
 
     public float _gameTime;
-    //public float _maxGameTime = 2 * 10f;
 
     private void Awake()
     {
-        _KillCount = 0;
-
-        if(_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GameScene")
+        {
+            InitGameScene();
+        }
+        else if (scene.name == "TitleScene")
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
+    private void InitGameScene()
+    {
+        _KillCount = 0;
+        _gameTime = 0f;
+
+        // Player 찾기
+        _player = FindAnyObjectByType<PlayerController>();
 
         if (_player != null)
         {
@@ -41,17 +67,50 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("GameManager 의 PlayerController 가 등록되지 않았습니다.");
+            _playerHP = null;
+            _playerExp = null;
         }
+
+        // 오브젝트 풀매니저 찾기
+        _objPool = FindAnyObjectByType<ObjectPoolManager>();
+
+        // GameOver 패널 찾기
+        if(_gameOverPanel == null || !_gameOverPanel.scene.IsValid())
+        {
+            GameObject[] allObject = Resources.FindObjectsOfTypeAll<GameObject>();
+
+            foreach(GameObject go in allObject)
+            {
+                if(go.name == "GameOverPanel")
+                {
+                    _gameOverPanel = go;
+                    break;
+                }
+            }
+        }
+        
+        
+        //GameObject panel = GameObject.Find("GameOverPanel");
+        //if (panel != null)
+        //{
+        //    _gameOverPanel = panel;
+        //    _gameOverPanel.SetActive(false);
+        //}
+        //else
+        //{
+        //    _gameOverPanel = null;
+        //}
+
     }
 
     public void GameOver()
     {
         Time.timeScale = 0f;
-        if(_gameOverPanel != null)
+        if (_gameOverPanel == null)
         {
-            _gameOverPanel.SetActive(true);
+            return;
         }
+        _gameOverPanel.SetActive(true);
     }
 
     public void OnClickGoTitle()
