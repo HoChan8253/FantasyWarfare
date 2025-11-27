@@ -10,7 +10,7 @@ public class GameOverUI : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("[GameOverUI] GameManager 인스턴스 없음");
+            //Debug.LogWarning("[GameOverUI] GameManager 인스턴스 없음");
         }
     }
 }

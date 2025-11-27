@@ -51,7 +51,6 @@ public class ObjectPoolManager : MonoBehaviour
             if(!_obj.activeSelf)
             {
                 select = _obj;
-                //select.SetActive(true);
                 break;
             }
         }

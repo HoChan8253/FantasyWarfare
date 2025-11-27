@@ -88,19 +88,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        
-        
-        //GameObject panel = GameObject.Find("GameOverPanel");
-        //if (panel != null)
-        //{
-        //    _gameOverPanel = panel;
-        //    _gameOverPanel.SetActive(false);
-        //}
-        //else
-        //{
-        //    _gameOverPanel = null;
-        //}
-
     }
 
     public void GameOver()

@@ -109,7 +109,6 @@ public class SoundManager : MonoBehaviour
             //Debug.LogWarning("[SoundManager] PlaySFX ½ÇÆÐ");
             return;
         }
-
         _sfxSource.volume = _sfxVolume;
         _sfxSource.PlayOneShot(clip);
     }

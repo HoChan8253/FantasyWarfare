@@ -60,7 +60,6 @@ public class PlayerHP : MonoBehaviour
         {
             _currentHP = _maxHP;
         }
-
         OnHealthChanged?.Invoke(_currentHP, _maxHP);
     }
 
